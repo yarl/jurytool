@@ -9,6 +9,10 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+a {
+  cursor: pointer;
+}
+
 html, body, #wrapper {
   height: 100%;
 }
