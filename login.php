@@ -20,6 +20,7 @@ $result = mysql_query("SELECT * FROM users WHERE name='" . $user . "' and countr
 $row = mysql_fetch_array($result);
 if (is_array($row)) {
   $_SESSION["user"] = $row['name'];
+  $_SESSION["country"] = $country;
   echo "OK";
   return true;
 } else {

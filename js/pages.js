@@ -6,8 +6,21 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
             success(function(data, status, headers, config) {
               if (data === "")
                 $location.path("/login");
-              else
-                $scope.user = data;
+              else {
+                var d = data;
+                $scope.user = d.user;
+                $scope.country = d.country;
+              }
+            }).
+            error(function(data, status, headers, config) {
+              alert("Error");
+              console.log(data);
+            });
+
+    $http({method: 'GET', url: 'list/poland.min.json'}).
+            success(function(data, status, headers, config) {
+              $scope.list = data;
+              $scope.batches = Math.ceil(Object.keys($scope.list).length / 100);
             }).
             error(function(data, status, headers, config) {
               alert("Error");
