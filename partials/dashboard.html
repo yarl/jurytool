@@ -8,9 +8,17 @@
         <div class="row" ng-hide="loading">
           <div ng-repeat="n in []| range: batches" class="col-md-2">
             <div class="batch" ng-class="batch[$index+1].closed == 1 ? 'batch-closed' : 'batch-open'">
-              <div class="batch-header"><i class="fa fa-lock" ng-show="batch[$index+1].closed == 1" title="This batch is done"></i> <a href="#/batch/{{$index + 1}}">#{{$index + 1}}</a></div>
-              <div ng-show='batch[$index + 1].owner'><i class="fa fa-user"></i> {{batch[$index + 1].owner}}<br /><button class="btn btn-default btn-xs" ng-show="batch[$index + 1].owner == user">Release</button></div>
-              <div ng-hide='batch[$index + 1].owner'><em>no owner</em><br /><button class="btn btn-default btn-xs" ng-click="assignBatch($index + 1)">Assign to me</button></div>
+              <div class="batch-header">
+                <i class="fa fa-lock" ng-show="batch[$index+1].closed == 1" title="This batch is done"></i> <a href="#/batch/{{$index + 1}}">#{{$index + 1}}</a>
+              </div>
+              <div ng-show='batch[$index + 1].owner'>
+                <i class="fa fa-user"></i> {{batch[$index + 1].owner}}
+                <button class="btn btn-default btn-xs btn-block" ng-show="batch[$index + 1].owner == user" ng-click="releaseBatch($index + 1)">Release</button>
+              </div>
+              <div ng-hide='batch[$index + 1].owner'>
+                <em>no owner</em>
+                <button class="btn btn-default btn-xs btn-block" ng-click="assignBatch($index + 1)">Assign to me</button>
+              </div>
             </div>
           </div>
         </div>
