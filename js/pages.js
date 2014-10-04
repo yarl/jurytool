@@ -2,7 +2,9 @@
  * DASHBOARD
  */
 app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
-    $http({method: 'GET', url: 'actions.php?action=getUserName'}).
+    $scope.loading = true;
+    
+    $http({method: 'GET', url: 'actions.php?action=getUser'}).
             success(function(data, status, headers, config) {
               if (data === "")
                 $location.path("/login");
@@ -21,6 +23,7 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
             success(function(data, status, headers, config) {
               $scope.list = data;
               $scope.batches = Math.ceil(Object.keys($scope.list).length / 100);
+              $scope.getBatches();
             }).
             error(function(data, status, headers, config) {
               alert("Error");
@@ -34,6 +37,18 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
                   $location.path("/login");
                 else
                   alert(data);
+              }).
+              error(function(data, status, headers, config) {
+                alert("Error");
+                console.log(data);
+              });
+    };
+
+    $scope.getBatches = function() {
+      $http({method: 'GET', url: 'actions.php?action=getBatchAll'}).
+              success(function(data, status, headers, config) {
+                $scope.batch = data.results;
+                $scope.loading = false;
               }).
               error(function(data, status, headers, config) {
                 alert("Error");

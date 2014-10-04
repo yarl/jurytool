@@ -22,7 +22,7 @@ html, body, #wrapper {
 }
 
 #page-wrapper {
-    height: calc(100% - 100px);
+/*    height: calc(100% - 100px);*/
     padding: 0 15px;
     min-height: 568px;
     background-color: #fff;
@@ -352,4 +352,26 @@ table.dataTable thead .sorting:after {
 
 .panel-yellow a:hover {
     color: #df8a13;
+}
+
+.main-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+}
+
+.batch {
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.batch-closed {
+  background: #eee;
+}
+
+.batch .batch-header {
+  font-size: 18px;
+  margin-bottom: 5px;
 }

@@ -2,10 +2,17 @@
 <div id="page-wrapper">
   <div class="row">
     <div class="col-lg-12">
-      <h2>Dashboard <small>{{country}}</small></h2>
       <div class="container">
-        <div class="row">
-          <div ng-repeat="n in [] | range: batches" class="col-md-1"><a href="#/batch/{{$index}}">#{{$index}}</a></div>
+        <h2 class="main-header">Dashboard <small>{{country}}</small></h2>
+        <div ng-show="loading">Loading...</div>
+        <div class="row" ng-hide="loading">
+          <div ng-repeat="n in []| range: batches" class="col-md-2">
+            <div class="batch" ng-class="batch[$index+1].closed == 1 ? 'batch-closed' : 'batch-open'">
+              <div class="batch-header"><i class="fa fa-lock" ng-show="batch[$index+1].closed == 1" title="This batch is done"></i> <a href="#/batch/{{$index + 1}}">#{{$index + 1}}</a></div>
+              <div ng-show='batch[$index + 1].owner'><i class="fa fa-user"></i> {{batch[$index + 1].owner}}<br /><button class="btn btn-default btn-xs" ng-show="batch[$index + 1].owner == user">Release</button></div>
+              <div ng-hide='batch[$index + 1].owner'><em>no owner</em><br /><button class="btn btn-default btn-xs" ng-click="assignBatch($index + 1)">Assign to me</button></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
