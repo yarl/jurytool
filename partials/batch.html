@@ -16,7 +16,10 @@
             <div class="batch" ng-class="{ 'batch-yes': data[item.id] == 1, 'batch-no': data[item.id] == 0 }">
               <div class="batch-header">#{{item.id}}</div>
               <div class="batch-photo">
-                <img src="//commons.wikimedia.org/w/thumb.php?f={{item.file}}&width=800" err-src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7c/X-circle.svg/50px-X-circle.svg.png"/>
+                <img 
+                  src="//commons.wikimedia.org/w/thumb.php?f={{item.file}}&width=800"
+                  err-src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7c/X-circle.svg/50px-X-circle.svg.png"
+                  />
               </div>
               <div>
                 <a class="btn btn-default btn-sm" href="//commons.wikimedia.org/wiki/File:{{item.file}}" target="_blank">Commons</a>

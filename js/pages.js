@@ -38,6 +38,10 @@ app.controller('LoginCtrl', ['$scope', '$http', '$location', function($scope, $h
  */
 app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
     $scope.loading = true;
+    $scope.countries = {
+      'PL': 'Poland',
+      'CZ': 'Czech Republic'
+    };
 
     $http({method: 'GET', url: 'actions.php?action=getUser'}).
             success(function(data, status, headers, config) {
@@ -104,6 +108,28 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
 
     $scope.releaseBatch = function(number) {
       $http({method: 'GET', url: 'actions.php?action=releaseBatch&number=' + number}).
+              success(function(data, status, headers, config) {
+                $scope.getBatches();
+              }).
+              error(function(data, status, headers, config) {
+                alert("Error");
+                console.log(data);
+              });
+    };
+
+    $scope.closeBatch = function(number) {
+      $http({method: 'GET', url: 'actions.php?action=closeBatch&number=' + number}).
+              success(function(data, status, headers, config) {
+                $scope.getBatches();
+              }).
+              error(function(data, status, headers, config) {
+                alert("Error");
+                console.log(data);
+              });
+    };
+
+    $scope.openBatch = function(number) {
+      $http({method: 'GET', url: 'actions.php?action=openBatch&number=' + number}).
               success(function(data, status, headers, config) {
                 $scope.getBatches();
               }).
@@ -197,6 +223,7 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', fun
     };
 
     $scope.saveData = function() {
+      $scope.busy = true;
       $http({
         method: 'POST',
         url: 'actions.php?action=saveBatch',
@@ -207,7 +234,10 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', fun
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).
               success(function(data, status, headers, config) {
-                $scope.getBatch();
+                if (data === "1") {
+                  $scope.busy = false;
+                  $scope.getBatch();
+                }
               }).
               error(function(data, status, headers, config) {
                 alert("Error");
@@ -225,7 +255,7 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', fun
                 console.log(data);
               });
     };
-    
+
     $scope.showVote = function(vote) {
       $scope.show = ($scope.show === vote) ? 2 : vote;
     };

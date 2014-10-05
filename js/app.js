@@ -1,4 +1,4 @@
-var app = angular.module('juryApp', ['ngAnimate', 'ngSanitize', 'ngRoute']);
+var app = angular.module('juryApp', ['ngAnimate', 'ngSanitize', 'ngRoute', 'mgcrea.ngStrap']);
 
 app.config(['$routeProvider',
   function($routeProvider) {

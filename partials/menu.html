@@ -10,7 +10,13 @@
       <a class="navbar-brand" href="#/">JuryTool <small>v. 0.1</small></a>
     </div>
     <ul class="nav navbar-top-links navbar-right" ng-show="user">
-      <li ng-show="id">
+      <li ng-show="busy">
+        <strong>Saving...</strong>
+      </li>
+      <li ng-show="id" style="margin-left: 10px;">
+        <button class="btn btn-default btn-sm" ng-disabled="batch.owner !== user" ng-click="saveData()"><i class="fa fa-save"></i> Save</button>
+      </li>
+      <li ng-show="id" style="margin-left: 10px;">
         <div class="btn-group">
           <button class="btn btn-default btn-sm" ng-class="size == 3 ? 'btn-selected' : ''" ng-click="setSize(3)">S</button>
           <button class="btn btn-default btn-sm" ng-class="size == 4 ? 'btn-selected' : ''" ng-click="setSize(4)">M</button>

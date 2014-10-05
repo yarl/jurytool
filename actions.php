@@ -33,6 +33,9 @@ switch ($action) {
   case "closeBatch":
     closeBatch();
     break;
+  case "openBatch":
+    openBatch();
+    break;
   default:
     echo "";
 }
@@ -151,5 +154,17 @@ function closeBatch() {
   mysql_select_db("test", $conn);
 
   $result = mysql_query("UPDATE batches SET closed=1 WHERE country=\"" . $_SESSION["country"] . "\" and number=" . $number);
+  echo $result;
+}
+
+/**
+ * 
+ */
+function openBatch() {
+  $number = mysql_real_escape_string($_GET['number']);
+  $conn = mysql_connect("localhost", "admin", "");
+  mysql_select_db("test", $conn);
+
+  $result = mysql_query("UPDATE batches SET closed=0 WHERE country=\"" . $_SESSION["country"] . "\" and number=" . $number);
   echo $result;
 }

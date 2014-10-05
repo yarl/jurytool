@@ -3,11 +3,11 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="container">
-        <h2 class="main-header">Dashboard <small>{{country}}</small></h2>
+        <h2 class="main-header">Dashboard <small>{{countries[country]}}</small></h2>
         <div ng-show="loading">Loading...</div>
         <div class="row" ng-hide="loading">
           <div ng-repeat="n in []| range: batches" class="col-md-2">
-            <div class="batch" ng-class="batch[$index+1].closed == 1 ? 'batch-closed' : 'batch-open'">
+            <div class="batch" ng-class="{ 'batch-closed': batch[$index+1].closed == 1, 'batch-mine': batch[$index + 1].owner == user }">
               <div class="batch-header">
                 <i class="fa fa-lock" ng-show="batch[$index + 1].closed == 1" title="This batch is done"></i>
                 <i class="fa fa-unlock" ng-show="batch[$index + 1].closed == 0"></i>
@@ -15,8 +15,8 @@
                 <div class="dropdown pull-right">
                   <a role="button" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-cog"></i> <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1"></a></li>
-                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-show="batch[$index + 1].owner == user && batch[$index + 1].closed == 0" ng-click="closeBatch($index + 1)"><i class="fa fa-lock"></i> Close batch</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-show="batch[$index + 1].owner == user && batch[$index + 1].closed == 1" ng-click="openBatch($index + 1)"><i class="fa fa-unlock"></i> Open batch</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" ng-hide="batch[$index + 1].owner" ng-click="assignBatch($index + 1)"><i class="fa fa-user"></i> Assign to me</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" ng-show="batch[$index + 1].owner == user" ng-click="releaseBatch($index + 1)"><i class="fa fa-user"></i> Assign to nobody</a></li>
                   </ul>

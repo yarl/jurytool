@@ -369,7 +369,15 @@ table.dataTable thead .sorting:after {
 }
 
 .batch-closed {
-  background: #eee;
+  background: rgba(92, 184, 92, 0.4);
+}
+
+.batch-mine {
+  background: rgba(150, 150, 150, 0.4);
+}
+
+.batch-closed.batch-mine {
+  background: rgba(92, 184, 92, 0.6);
 }
 
 .batch .batch-header {
