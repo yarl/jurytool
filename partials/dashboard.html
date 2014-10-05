@@ -9,15 +9,24 @@
           <div ng-repeat="n in []| range: batches" class="col-md-2">
             <div class="batch" ng-class="batch[$index+1].closed == 1 ? 'batch-closed' : 'batch-open'">
               <div class="batch-header">
-                <i class="fa fa-lock" ng-show="batch[$index+1].closed == 1" title="This batch is done"></i> <a href="#/batch/{{$index + 1}}">#{{$index + 1}}</a>
+                <i class="fa fa-lock" ng-show="batch[$index + 1].closed == 1" title="This batch is done"></i>
+                <i class="fa fa-unlock" ng-show="batch[$index + 1].closed == 0"></i>
+                <a href="#/batch/{{$index + 1}}">#{{$index + 1}}</a>
+                <div class="dropdown pull-right">
+                  <a role="button" class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-cog"></i> <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1"></a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-hide="batch[$index + 1].owner" ng-click="assignBatch($index + 1)"><i class="fa fa-user"></i> Assign to me</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-show="batch[$index + 1].owner == user" ng-click="releaseBatch($index + 1)"><i class="fa fa-user"></i> Assign to nobody</a></li>
+                  </ul>
+                </div>
               </div>
               <div ng-show='batch[$index + 1].owner'>
                 <i class="fa fa-user"></i> {{batch[$index + 1].owner}}
-                <button class="btn btn-default btn-xs btn-block" ng-show="batch[$index + 1].owner == user" ng-click="releaseBatch($index + 1)">Release</button>
               </div>
               <div ng-hide='batch[$index + 1].owner'>
                 <em>no owner</em>
-                <button class="btn btn-default btn-xs btn-block" ng-click="assignBatch($index + 1)">Assign to me</button>
               </div>
             </div>
           </div>
