@@ -373,7 +373,8 @@ table.dataTable thead .sorting:after {
 }
 
 .batch .batch-header {
-  font-size: 18px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .batch-photo {
@@ -421,4 +422,8 @@ table.dataTable thead .sorting:after {
 
 .batch-no {
   background: rgba(217, 83, 79, 0.7);
+}
+
+.dropdown-menu > li > a {
+  font-size: 13px;
 }

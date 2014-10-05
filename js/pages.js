@@ -122,10 +122,10 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', fun
     $scope.loading = true;
 
     $scope.data = {};
-    
+
     $scope.size = 3;
-    $scope.show = 0; //0: all / -1: no / 1: yes
-    
+    $scope.show = 2; //2: all / 0: no / 1: yes
+
     $scope.votes = {
       yes: 0,
       no: 0
@@ -214,7 +214,7 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', fun
                 console.log(data);
               });
     };
-    
+
     $scope.closeBatch = function() {
       $http({method: 'GET', url: 'actions.php?action=closeBatch&number=' + $scope.id}).
               success(function(data, status, headers, config) {
@@ -224,5 +224,9 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', fun
                 alert("Error");
                 console.log(data);
               });
+    };
+    
+    $scope.showVote = function(vote) {
+      $scope.show = ($scope.show === vote) ? 2 : vote;
     };
   }]);

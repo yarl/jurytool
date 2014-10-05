@@ -20,8 +20,8 @@
       </li>
       <li ng-show="id" style="margin-left: 10px;">
         <div class="btn-group">
-          <button class="btn btn-success btn-sm" ng-click="showVote(1)"><i class="fa fa-check-circle"></i> {{votes.yes}}</button>
-          <button class="btn btn-danger btn-sm" ng-click="showVote(-1)"><i class="fa fa-times-circle"></i> {{votes.no}}</button>
+          <button class="btn btn-success btn-sm" ng-click="showVote(1)" ng-class="show == 1 ? 'active' : ''"><i class="fa fa-check-circle"></i> {{votes.yes}}</button>
+          <button class="btn btn-danger btn-sm" ng-click="showVote(0)" ng-class="show == 0 ? 'active' : ''"><i class="fa fa-times-circle"></i> {{votes.no}}</button>
         </div>
       </li>
       <li class="dropdown">
