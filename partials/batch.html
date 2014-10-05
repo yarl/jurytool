@@ -17,8 +17,9 @@
               <div class="batch-header">#{{item.id}}</div>
               <div class="batch-photo">
                 <img 
-                  src="//commons.wikimedia.org/w/thumb.php?f={{item.file}}&width=800"
+                  ng-src="//commons.wikimedia.org/w/thumb.php?f={{item.file}}&width=1200"
                   err-src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7c/X-circle.svg/50px-X-circle.svg.png"
+                  ng-click="openFile($index)"
                   />
               </div>
               <div>

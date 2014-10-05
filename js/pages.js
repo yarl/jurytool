@@ -45,7 +45,7 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
 
     $http({method: 'GET', url: 'actions.php?action=getUser'}).
             success(function(data, status, headers, config) {
-              if (data === "")
+              if (data === "No access")
                 $location.path("/login");
               else {
                 var d = data;
@@ -143,7 +143,7 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
 /**
  * BATCH
  */
-app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams) {
+app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$modal', function($scope, $http, $location, $routeParams, $modal) {
     $scope.id = $routeParams.id;
     $scope.loading = true;
 
@@ -155,6 +155,11 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', fun
     $scope.votes = {
       yes: 0,
       no: 0
+    };
+
+    $scope.modal = {
+      "title": "Title",
+      "content": "Hello Modal<br />This is a multiline message!"
     };
 
     $http({method: 'GET', url: 'actions.php?action=getUser'}).
@@ -258,5 +263,16 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', fun
 
     $scope.showVote = function(vote) {
       $scope.show = ($scope.show === vote) ? 2 : vote;
+    };
+    
+    $scope.openFile = function(index) {
+      $scope.file = $scope.range[index];
+
+      var myModal = $modal({
+        placement: 'center',
+        scope: $scope,
+        template: 'partials/file.html',
+        show: true
+      });
     };
   }]);
