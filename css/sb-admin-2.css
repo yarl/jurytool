@@ -392,13 +392,12 @@ table.dataTable thead .sorting:after {
 
 .batch .batch-header {
   font-size: 20px;
-  margin-bottom: 10px;
 }
 
 .batch-photo {
   height: 200px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   background: #222;
   position: relative;
 }
@@ -429,6 +428,14 @@ table.dataTable thead .sorting:after {
   right: 0;
   bottom: 0;
   cursor: pointer;
+}
+
+.batch-filename {
+  margin: 0 2px 10px 2px;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .batch .batch-vote .btn {

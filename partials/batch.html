@@ -15,6 +15,7 @@
           <div ng-repeat="item in range track by $index" class="col-md-{{size}}" ng-show="show == 2 || show == data[item.id]">
             <div class="batch" ng-class="{ 'batch-yes': data[item.id] == 1, 'batch-no': data[item.id] == 0 }">
               <div class="batch-header">#{{item.id}}</div>
+              <div class="batch-filename" title="{{item.file}}"><i class="fa fa-picture-o"></i> {{item.file}}</div>
               <div class="batch-photo">
                 <img 
                   ng-src="//commons.wikimedia.org/w/thumb.php?f={{item.file}}&width=1200"
