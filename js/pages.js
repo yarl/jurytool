@@ -51,6 +51,7 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
                 var d = data;
                 $scope.user = d.user;
                 $scope.country = d.country;
+                $scope.getList($scope.country);
               }
             }).
             error(function(data, status, headers, config) {
@@ -58,16 +59,18 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
               console.log(data);
             });
 
-    $http({method: 'GET', url: 'list/poland.min.json'}).
-            success(function(data, status, headers, config) {
-              $scope.list = data;
-              $scope.batches = Math.ceil(Object.keys($scope.list).length / 100);
-              $scope.getBatches();
-            }).
-            error(function(data, status, headers, config) {
-              alert("Error");
-              console.log(data);
-            });
+    $scope.getList = function(country) {
+      $http({method: 'GET', url: 'list/' + country.toLowerCase() + '.min.json'}).
+              success(function(data, status, headers, config) {
+                $scope.list = data;
+                $scope.batches = Math.ceil(Object.keys($scope.list).length / 100);
+                $scope.getBatches();
+              }).
+              error(function(data, status, headers, config) {
+                alert("Error");
+                console.log(data);
+              });
+    };
 
     $scope.logOut = function() {
       $http({method: 'GET', url: 'actions.php?action=logout'}).
@@ -170,6 +173,7 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$m
                 var d = data;
                 $scope.user = d.user;
                 $scope.country = d.country;
+                $scope.getList($scope.country);
               }
             }).
             error(function(data, status, headers, config) {
@@ -177,17 +181,19 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$m
               console.log(data);
             });
 
-    $http({method: 'GET', url: 'list/poland.min.json'}).
-            success(function(data, status, headers, config) {
-              $scope.range = [];
-              for (var i = $scope.id * 100 - 100, max = $scope.id * 100; i < max; i++)
-                $scope.range.push(data[i]);
-              $scope.loading = false;
-            }).
-            error(function(data, status, headers, config) {
-              alert("Error");
-              console.log(data);
-            });
+    $scope.getList = function(country) {
+      $http({method: 'GET', url: 'list/' + country.toLowerCase() + '.min.json'}).
+              success(function(data, status, headers, config) {
+                $scope.range = [];
+                for (var i = $scope.id * 100 - 100, max = $scope.id * 100; i < max; i++)
+                  $scope.range.push(data[i]);
+                $scope.loading = false;
+              }).
+              error(function(data, status, headers, config) {
+                alert("Error");
+                console.log(data);
+              });
+    };
 
     $scope.getBatch = function() {
       $http({method: 'GET', url: 'actions.php?action=getBatch&number=' + $scope.id}).
@@ -264,7 +270,7 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$m
     $scope.showVote = function(vote) {
       $scope.show = ($scope.show === vote) ? 2 : vote;
     };
-    
+
     $scope.openFile = function(index) {
       $scope.file = $scope.range[index];
 
