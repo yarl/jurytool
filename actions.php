@@ -1,6 +1,8 @@
 <?php
-
 session_start();
+$conn = mysql_connect("localhost", "admin", "");
+mysql_select_db("test", $conn);
+  
 $action = mysql_real_escape_string($_GET['action']);
 
 if (!isset($_SESSION['user'])) {
@@ -61,8 +63,6 @@ function logout() {
  */
 function getBatch() {
   $number = mysql_real_escape_string($_GET['number']);
-  $conn = mysql_connect("localhost", "admin", "");
-  mysql_select_db("test", $conn);
   $result = mysql_query("SELECT * FROM batches WHERE number='" . $number . "' and country = '" . $_SESSION["country"] . "'");
 
   $text = "{\"results\":";
@@ -82,8 +82,6 @@ function getBatch() {
  * 
  */
 function getBatchAll() {
-  $conn = mysql_connect("localhost", "admin", "");
-  mysql_select_db("test", $conn);
   $result = mysql_query("SELECT * FROM batches WHERE country = '" . $_SESSION["country"] . "'");
 
   $text = "{\"results\":{";
@@ -100,9 +98,6 @@ function getBatchAll() {
  */
 function assignBatch() {
   $number = mysql_real_escape_string($_GET['number']);
-  $conn = mysql_connect("localhost", "admin", "");
-  mysql_select_db("test", $conn);
-
   $result = mysql_query("SELECT * FROM batches WHERE number='" . $number . "' and country = '" . $_SESSION["country"] . "'");
   $row = mysql_fetch_array($result);
 
@@ -123,9 +118,7 @@ function assignBatch() {
  */
 function releaseBatch() {
   $number = mysql_real_escape_string($_GET['number']);
-  $conn = mysql_connect("localhost", "admin", "");
-  mysql_select_db("test", $conn);
-
+  
   $result = mysql_query("UPDATE batches SET owner=\"\" WHERE country=\"" . $_SESSION["country"] . "\" and number=" . $number);
   echo $result;
 }
@@ -138,9 +131,6 @@ function saveBatch() {
   $number = mysql_real_escape_string($batch->number);
   $data = mysql_real_escape_string($batch->data);
 
-  $conn = mysql_connect("localhost", "admin", "");
-  mysql_select_db("test", $conn);
-
   $result = mysql_query("UPDATE batches SET data=\"" . $data . "\" WHERE country=\"" . $_SESSION["country"] . "\" and number=" . $number);
   echo $result;
 }
@@ -150,8 +140,6 @@ function saveBatch() {
  */
 function closeBatch() {
   $number = mysql_real_escape_string($_GET['number']);
-  $conn = mysql_connect("localhost", "admin", "");
-  mysql_select_db("test", $conn);
 
   $result = mysql_query("UPDATE batches SET closed=1 WHERE country=\"" . $_SESSION["country"] . "\" and number=" . $number);
   echo $result;
@@ -162,8 +150,6 @@ function closeBatch() {
  */
 function openBatch() {
   $number = mysql_real_escape_string($_GET['number']);
-  $conn = mysql_connect("localhost", "admin", "");
-  mysql_select_db("test", $conn);
 
   $result = mysql_query("UPDATE batches SET closed=0 WHERE country=\"" . $_SESSION["country"] . "\" and number=" . $number);
   echo $result;

@@ -3,6 +3,9 @@
 session_start();
 $message = "";
 
+$conn = mysql_connect("localhost", "admin", "");
+mysql_select_db("test", $conn);
+
 $data = json_decode($_POST['data']);
 $pass = mysql_real_escape_string($data->pass);
 $user = mysql_real_escape_string($data->name);
@@ -13,8 +16,6 @@ if ($pass != "pass") {
   return false;
 }
 
-$conn = mysql_connect("localhost", "admin", "");
-mysql_select_db("test", $conn);
 $result = mysql_query("SELECT * FROM users WHERE name='" . $user . "' and country = '" . $country . "'");
 
 $row = mysql_fetch_array($result);
