@@ -2,6 +2,8 @@
  * LOGIN
  */
 app.controller('LoginCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+    $scope.page = "login";
+    
     $scope.countries = [
       {id: 'PL', name: 'Poland'},
       {id: 'CZ', name: 'Czech Republic'}
@@ -37,10 +39,17 @@ app.controller('LoginCtrl', ['$scope', '$http', '$location', function($scope, $h
  * DASHBOARD
  */
 app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+    $scope.page = "dash";
+    
     $scope.loading = true;
     $scope.countries = {
-      'PL': 'Poland',
-      'CZ': 'Czech Republic'
+      PL: 'Poland',
+      CZ: 'Czech Republic'
+    };
+    
+    $scope.filter = {
+      mine: false,
+      opened: false
     };
 
     $http({method: 'GET', url: 'actions.php?action=getUser'}).
@@ -141,6 +150,10 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
                 console.log(data);
               });
     };
+    
+    $scope.filterBatch = function(filter) {
+      $scope.filter[filter] = !$scope.filter[filter];
+    };
   }]);
 
 /**
@@ -148,10 +161,11 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
  */
 app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$modal', function($scope, $http, $location, $routeParams, $modal) {
     $scope.id = $routeParams.id;
+    $scope.page = "batch";
+    
     $scope.loading = true;
 
     $scope.data = {};
-
     $scope.size = 3;
     $scope.show = 2; //2: all / 0: no / 1: yes
 

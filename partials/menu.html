@@ -13,10 +13,10 @@
       <li ng-show="busy">
         <strong>Saving...</strong>
       </li>
-      <li ng-show="id" style="margin-left: 10px;">
+      <li ng-show="page === 'batch'" style="margin-left: 10px;">
         <button class="btn btn-default btn-sm" ng-disabled="batch.owner !== user" ng-click="saveData()"><i class="fa fa-save"></i> Save</button>
       </li>
-      <li ng-show="id" style="margin-left: 10px;">
+      <li ng-show="page === 'batch'" style="margin-left: 10px;">
         <div class="btn-group">
           <button class="btn btn-default btn-sm" ng-class="size == 3 ? 'btn-selected' : ''" ng-click="setSize(3)">S</button>
           <button class="btn btn-default btn-sm" ng-class="size == 4 ? 'btn-selected' : ''" ng-click="setSize(4)">M</button>
@@ -24,7 +24,7 @@
           <button class="btn btn-default btn-sm" ng-class="size == 12 ? 'btn-selected' : ''" ng-click="setSize(12)">XL</button>
         </div>
       </li>
-      <li ng-show="id" style="margin-left: 10px;">
+      <li ng-show="page === 'batch'" style="margin-left: 10px;">
         <div class="btn-group">
           <button class="btn btn-success btn-sm" ng-click="showVote(1)" ng-class="show == 1 ? 'active' : ''"><i class="fa fa-check-circle"></i> {{votes.yes}}</button>
           <button class="btn btn-danger btn-sm" ng-click="showVote(0)" ng-class="show == 0 ? 'active' : ''"><i class="fa fa-times-circle"></i> {{votes.no}}</button>
