@@ -476,6 +476,12 @@ table.dataTable thead .sorting:after {
   max-height: 100%;
 }
 
+.loader {
+  margin-top: 20px;
+  opacity: .2;
+  font-size: 40px;
+}
+
 footer {
   margin: 20px 0 20px;
 }

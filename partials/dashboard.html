@@ -9,7 +9,7 @@
             <button class="btn btn-default btn-sm" ng-class="filter.opened ? 'btn-selected' : ''" ng-click="filterBatch('opened')"><i class="fa fa-unlock"></i> Only Opened</button>
           </span>
         </h2>
-        <div ng-show="loading" class="text-center" style="margin-top: 20px; opacity: .2; font-size: 40px;"><i class="fa fa-refresh fa-spin"></i></div>
+        <div ng-show="loading" class="text-center loader"><i class="fa fa-refresh fa-spin"></i></div>
         <div class="row" ng-hide="loading">
           <div ng-repeat="n in []| range: batches" class="col-md-2"
                ng-hide="(filter.mine && batch[$index + 1].owner !== user) || (filter.opened && batch[$index + 1].closed == 1)">

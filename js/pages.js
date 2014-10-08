@@ -3,7 +3,7 @@
  */
 app.controller('LoginCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
     $scope.page = "login";
-    
+
     $scope.countries = [
       {id: 'PL', name: 'Poland'},
       {id: 'CZ', name: 'Czech Republic'}
@@ -40,13 +40,13 @@ app.controller('LoginCtrl', ['$scope', '$http', '$location', function($scope, $h
  */
 app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
     $scope.page = "dash";
-    
+
     $scope.loading = true;
     $scope.countries = {
       PL: 'Poland',
       CZ: 'Czech Republic'
     };
-    
+
     $scope.filter = {
       mine: false,
       opened: false
@@ -150,7 +150,7 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
                 console.log(data);
               });
     };
-    
+
     $scope.filterBatch = function(filter) {
       $scope.filter[filter] = !$scope.filter[filter];
     };
@@ -159,10 +159,10 @@ app.controller('DashboardCtrl', ['$scope', '$http', '$location', function($scope
 /**
  * BATCH
  */
-app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$modal', function($scope, $http, $location, $routeParams, $modal) {
+app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$modal', '$alert', function($scope, $http, $location, $routeParams, $modal, $alert) {
     $scope.id = $routeParams.id;
     $scope.page = "batch";
-    
+
     $scope.loading = true;
 
     $scope.data = {};
@@ -174,14 +174,9 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$m
       no: 0
     };
 
-    $scope.modal = {
-      "title": "Title",
-      "content": "Hello Modal<br />This is a multiline message!"
-    };
-
     $http({method: 'GET', url: 'actions.php?action=getUser'}).
             success(function(data, status, headers, config) {
-              if (data === "")
+              if (data === "No access")
                 $location.path("/login");
               else {
                 var d = data;
@@ -259,7 +254,14 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$m
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).
               success(function(data, status, headers, config) {
+                if (data === "No access")
+                  $location.path("/login");
                 if (data === "1") {
+                  $alert({
+                    title: 'Success',
+                    content: 'Changes saved.',
+                    placement: 'top-right', type: 'success', show: true, duration: 1
+                  });
                   $scope.busy = false;
                   $scope.getBatch();
                 }
@@ -273,6 +275,8 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$m
     $scope.closeBatch = function() {
       $http({method: 'GET', url: 'actions.php?action=closeBatch&number=' + $scope.id}).
               success(function(data, status, headers, config) {
+                if (data === "No access")
+                  $location.path("/login");
                 $location.path("/");
               }).
               error(function(data, status, headers, config) {
