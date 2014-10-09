@@ -273,6 +273,7 @@ app.controller('BatchCtrl', ['$scope', '$http', '$location', '$routeParams', '$m
     };
 
     $scope.closeBatch = function() {
+      $scope.saveData();
       $http({method: 'GET', url: 'actions.php?action=closeBatch&number=' + $scope.id}).
               success(function(data, status, headers, config) {
                 if (data === "No access")
