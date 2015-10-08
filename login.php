@@ -3,15 +3,16 @@
 session_start();
 $message = "";
 
-$conn = mysql_connect("localhost", "admin", "");
-mysql_select_db("test", $conn);
+require_once "../configure.php";
+$conn = mysql_connect($DBserver, $DBuser, $DBpassword);
+mysql_select_db($DBname, $conn);
 
 $data = json_decode($_POST['data']);
 $pass = mysql_real_escape_string($data->pass);
 $user = mysql_real_escape_string($data->name);
 $country = mysql_real_escape_string($data->country);
 
-if ($pass != "pass") {
+if ($pass != $loginPw) {
   echo "Invalid Password!";
   return false;
 }
