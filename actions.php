@@ -1,7 +1,8 @@
 <?php
 session_start();
-$conn = mysql_connect("localhost", "admin", "");
-mysql_select_db("test", $conn);
+require_once "../configure.php";
+$conn = mysql_connect("localhost", $DBuser, $DBpassword);
+mysql_select_db($DBname, $conn);
   
 $action = mysql_real_escape_string($_GET['action']);
 
