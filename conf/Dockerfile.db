@@ -1,0 +1,4 @@
+FROM mysql:5.5.49
+
+COPY tables.sql /docker-entrypoint-initdb.d/
+COPY users.sql /docker-entrypoint-initdb.d/

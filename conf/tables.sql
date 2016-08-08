@@ -1,7 +1,8 @@
 CREATE TABLE users (
-  user_name varchar(255) binary NOT NULL default '',
+  name varchar(255) binary NOT NULL default '',
   country varchar(255) binary NOT NULL default ''
 );
+
 CREATE TABLE batches (
   number int unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
   country varchar(255) binary NOT NULL default '',
